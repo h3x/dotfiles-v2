@@ -1,0 +1,4 @@
+#!/bin/bash
+
+obsidian $SECOND_BRAIN/3 Daily Log/DailyLog 2024.md &
+nvim $SECOND_BRAIN/3 Daily Log/DailyLog 2024.md

@@ -1,0 +1,38 @@
+{
+    "storage_dsn": "access_key_id",
+    "uuid": "213213123123123",
+    "name": "TheTenant",
+    "region": "aus1",
+    "aws_region": "ap-southeast-2",
+    "status": "enabled",
+    "databases": {
+        "mysql": {
+            "engine": "mysql",
+            "hostname": "the.hostname.net",
+            "replica": [],
+            "port": 3306,
+            "password": "Hunter2",
+            "username": "Adam",
+            "server": null,
+            "dsn": "mysql://tenant:hunter2@the.hostname.net:3306/Adam",
+            "name": "Adam",
+            "schema_name": null,
+            "scheme": "mysql",
+            "charset": "utf8"
+        },
+        "jobs": {
+            "engine": "postgresql",
+            "hostname": "postgres.the.hostname.net",
+            "replica": [],
+            "port": 5432,
+            "password": "a$$word",
+            "username": "jobbyjobs",
+            "server": null,
+            "dsn": "postgresql+psycopg2://jobbyjobs:a$$word@postgres.the.hostname.net:5432/jobbyjobs",
+            "name": "background_jobs",
+            "schema_name": "public",
+            "scheme": "postgresql+psycopg2",
+            "charset": "utf8"
+        }
+    }
+}

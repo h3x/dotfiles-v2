@@ -1,0 +1,48 @@
+#!/bin/bash
+# tmux display-popup "list-sessions"
+
+
+list_tmux_windows() {
+    # Run the tmux list-windows command and capture the output
+    windows=$(tmux list-windows | awk -F: '{print $1}')
+    echo "$windows"
+}
+
+switch_tmux_window() {
+    # Switch to the specified window index
+    tmux select-window -t "$1"
+}
+
+main() {
+    # List tmux windows
+    windows=$(list_tmux_windows)
+
+    if [[ -n "$windows" ]]; then
+        # Display the list of windows
+        echo "Available tmux windows:"
+        index=1
+        for window in $windows; do
+            echo "$index: $window"
+            ((index++))
+        done
+
+        # Prompt for window selection
+        read -p "Enter the index of the window to switch to (q to quit): " selection
+
+        if [[ "$selection" =~ ^[0-9]+$ ]]; then
+            if ((selection >= 1 && selection <= index - 1)); then
+                switch_tmux_window "$selection"
+            else
+                echo "Invalid window index."
+            fi
+        elif [[ "$selection" == "q" ]]; then
+            echo "Exiting window switcher."
+        else
+            echo "Invalid input. Please enter a number or 'q' to quit."
+        fi
+    else
+        echo "No tmux windows found."
+    fi
+}
+
+main

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Usage: ./remove_duplicates.sh input.json output.json
+
+# Check if input file and output file are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 input.json output.json"
+    exit 1
+fi
+
+input_file="$1"
+output_file="$2"
+
+# Check if the input file exists
+if [ ! -f "$input_file" ]; then
+    echo "Error: File '$input_file' not found!"
+    exit 1
+fi
+
+# Use jq to parse JSON and remove duplicate keys
+jq 'walk(if type == "object" then with_entries(unique_by(.key)) else . end)' "$input_file" > "$output_file"
+
+# Check if jq succeeded
+if [ $? -eq 0 ]; then
+    echo "Duplicate keys removed and saved to '$output_file'."
+else
+    echo "Error processing JSON file."
+    exit 1
+fi

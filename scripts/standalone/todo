@@ -1,0 +1,45 @@
+#!/bin/bash
+
+get_filename() {
+	read -p "Enter a filename: " filename
+	echo "$filename"
+}
+
+open_file() {
+
+	cd "$1" || exit
+	touch "$1/$filename.md"
+
+	timestamp="$(date +"%Y%m%d%H%M")"
+
+	# format the file
+	{
+		echo "# TODO"
+		echo -en "- [ ] \n"
+		echo -en "\n"
+		echo -en "\n"
+		echo "Links:"
+		echo -en "\n"
+		echo "$timestamp"
+	} >>"$1/$filename.md"
+
+	# Open the file in Neovim
+	nvim '+ normal ggzzi' "$1/$filename.md"
+}
+
+if [[ $# -eq 0 ]]; then
+	filename=$(get_filename)
+fi
+
+if [[ $# -gt 1 ]]; then
+	echo "Please provide only one filename separated by dashes, without .md extension."
+	echo "Example: todo my-new-note"
+	exit 1
+fi
+
+# set filename to the argument given to the script
+if [[ $# -eq 1 ]]; then
+	filename=$1
+fi
+
+open_file "$SECOND_BRAIN/5 Todo"
