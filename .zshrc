@@ -167,8 +167,8 @@ function nvims() {
 }
 
 # Alaya
-[ $USER = "developer1" ] &&
-[ -f /home/developer1/dotfiles/.workrc ] && source /home/developer1/dotfiles/.workrc && source ~/dotfiles/.sensitive
+[ $USER = "adam" ] &&
+[ -f ~/dotfiles/.workrc ] && source ~/dotfiles/.workrc && source ~/dotfiles/.sensitive
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -235,3 +235,6 @@ alias eww="/home/adam/dev/eww/target/release/eww"
 open() {
   xdg-open "$@" >/dev/null 2>&1 &
 }
+
+# Alaya
+[ -f /home/adam/accloud-lde/profile/alaya_init.sh ] && source /home/adam/accloud-lde/profile/alaya_init.sh

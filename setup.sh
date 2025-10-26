@@ -137,9 +137,9 @@ symlink_dotfiles() {
 # Main execution
 logG "Starting dotfiles setup..."
 
-# clone_packages
-# run_curls
-# install_packages
+clone_packages
+run_curls
+install_packages
 symlink_dotfiles
 
 source "$HOME/.nvm/nvm.sh"

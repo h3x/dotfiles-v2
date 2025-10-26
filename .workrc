@@ -1,0 +1,109 @@
+alias auto="cd ~/accloud-lde/alaya-cypress-rcm && node mapi/boot --mode=ui --CYPRESS.config.baseUrl=http:/.localhost --CYPRESS.spec=\"/home/adam/tmp/**/*.cy.js\"",
+alias cypress="cd ~/accloud-lde/alaya-cypress-rcm && npm run ui -- --CYPRESS.config.baseUrl=http://alayadev.localhost"
+
+# Places
+alias wa='cd ~/accloud-lde/services/webapp'
+alias waa='cd ~/accloud-lde/services/webapp/web/js/vue-components'
+alias aa='cd ~/accloud-lde/services/api.accounting'
+# alias ca='cd ~/accloud-lde/services/api.accounting/api.common'
+alias pa='cd ~/accloud-lde/services/phpapp'
+alias ra='cd ~/accloud-lde/services/api.rating/'
+alias da='cd ~/accloud-lde/services/db-migrations'
+alias ap='cd ~/accloud-lde/services/api.printing'
+alias sa='cd ~/accloud-lde/services/api.scheduler'
+alias ca='cd ~/accloud-lde/alaya-cypress-rcm'
+# alias todo='cd ~/Junk/Docs && glow'
+alias dev='cd ~/dev'
+
+# alias pullall='git-submodules "git checkout develop && git pull && git submodule update"'
+# alias makemigrations="cd ~/dev/alaya && make cli-migrations"
+# alias updatedb='cd ~/dev/alaya/db-migrations && ./update_mysql.sh'
+alias v='nvim'
+alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_PORT $DOCKER_XDEBUG_PORT && echo DOCKER_REGISTRY  $DOCKER_REGISTRY'
+
+# Git
+alias develop='git checkout develop'
+alias main='git checkout main'
+
+# Create/Update test db
+alias testdb="da && ./create.sh -d -h db -e mysql -n test_mysql -t mysql -u root -p root -l root -r root -P 3306 -a dev"
+
+# pretty prints
+alias localdb="cat $ALAYACARE_HOME/services/nabu/web/api/v1/tenant.json | jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"
+alias dbgrep="jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"
+
+# Docker shit
+alias resetdocker='sudo systemctl restart docker'
+alias resetnet='sudo sysctl -w net.ipv4.ip_forward=1'
+alias dpld='dc exec -u www-data app composer dump-autoload'
+alias dcclean="docker system prune -a -f"
+alias builddebug='docker build -t api.accounting:debug --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN --secret id=CODEARTIFACT_AUTH_TOKEN,env=CODEARTIFACT_AUTH_TOKEN $ALAYACARE_HOME/services/api.accounting/.'
+alias terradome='rm $ALAYACARE_HOME/services/accloud-tf-infrastructure/components/cluster_stacks/modules/stack/terraform.tfstate'
+
+# Fucking php :(
+function phpsucks() {
+  pa
+  rm -rf var/log/*
+  sudo chown -R adam:adam var/cache;
+  sudo chmod -R 777 var/log
+  # ./exec composer dump-autoload
+  dc exec app composer dump-autoload
+}
+
+# Testing
+alias watest='npm run test --'
+
+function patest() {
+    ALAYA_LOCATION=/home/adam/accloud-lde/services/phpapp
+    
+    # setup
+    export WORKSPACE=$(pwd)
+    export MIGRATION_TAG=develop
+
+    #test runner
+    docker-compose -f docker-compose.build.yml exec --user 0 app vendor/bin/phpunit $1
+}
+
+# VPN Shit
+function _vpn_action() {
+  vpn_name=$1
+
+  # if openvpn3 is not installed, warn and exit
+  if ! command -v openvpn3 &> /dev/null; then
+    echo "openvpn3 is not installed"
+    return
+  fi
+
+  # Is the VPN already running?
+  if openvpn3 sessions-list | grep -q $vpn_name; then
+    echo "VPN $vpn_name is running, stopping it"
+    openvpn3 session-manage --disconnect --config $vpn_name
+  else
+    openvpn3 session-start --config $vpn_name
+  fi
+}
+
+function vpnrc() {
+  _vpn_action "rc.can1"
+}
+
+function vpnnon() {
+  _vpn_action "nonprod.can1"
+}
+
+function vpnprod() {
+  _vpn_action "prod.can1"
+}
+
+function vpnaus() {
+  _vpn_action "ausprod.can1"
+}
+
+export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
+export QT_SCALE_FACTOR=0.5
+
+# Source other work files
+
+[ -f ~/dotfiles/.sensitive ] && source ~/dotfiles/.sensitive
+[ -f /home/adam/.alaya/.alaya_profile ] && source /home/adam/.alaya/.alaya_profile
+[ -f /home/adam/accloud-lde/profile/alaya_init.sh ] && source /home/adam/accloud-lde/profile/alaya_init.sh
