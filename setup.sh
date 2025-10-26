@@ -59,25 +59,44 @@ install_packages() {
         ubuntu)
             logG "Installing packages on Ubuntu..."
             sudo apt update
-            for pkg in $(cat packages.txt); do
+            while read -r pkg; do
+                [[ "$pkg" =~ ^#.*$ || -z "$pkg" ]] && continue
                 if ! dpkg -l | grep -q "^ii  $pkg"; then
                     logG "Installing package: $pkg"
-                    sudo apt install -y $pkg
+                    sudo apt install -y "$pkg"
                 else
                     error "Package $pkg is already installed"
                 fi
-            done
+            done < packages.txt
             ;;
         arch)
             logG "Installing packages on Arch Linux..."
-            for pkg in $(cat packages.txt); do
-                if ! pacman -Qi $pkg &>/dev/null; then
-                    logG "Installing package: $pkg"
-                    sudo pacman -S --noconfirm $pkg
-                else
+
+            # Ensure yay is installed
+            if ! command -v yay &>/dev/null; then
+                logM "yay not found. Installing yay..."
+                sudo pacman -S --needed --noconfirm git base-devel
+                git clone https://aur.archlinux.org/yay.git /tmp/yay
+                (cd /tmp/yay && makepkg -si --noconfirm)
+                rm -rf /tmp/yay
+            fi
+
+            while read -r pkg; do
+                [[ "$pkg" =~ ^#.*$ || -z "$pkg" ]] && continue
+
+                if pacman -Qi "$pkg" &>/dev/null; then
                     error "Package $pkg is already installed"
+                    continue
                 fi
-            done
+
+                if pacman -Si "$pkg" &>/dev/null; then
+                    logG "Installing $pkg from official repos..."
+                    sudo pacman -S --noconfirm --needed "$pkg"
+                else
+                    logG "Installing $pkg from AUR..."
+                    yay -S --noconfirm --needed "$pkg"
+                fi
+            done < packages.txt
             ;;
         *)
             error "Unsupported Linux distribution: $DISTRO"
@@ -90,18 +109,14 @@ install_packages() {
 symlink_dotfiles() {
     DIR=$HOME/dotfiles
     DOTFILES=(
-        # ".config/alacritty"
-        # ".config/dunst"
-        # ".config/picom"
         ".config/tmux"
         ".config/bat"
-        # ".config/qtile"
-        # ".config/rofi"
-        # ".config/k9s"
-        # ".wezterm"
+        ".config/eww"
+        ".config/hypr"
+        ".config/nvim"
+        ".config/omarchy"
         ".zshrc"
         # ".ideavimrc"
-        # ".config/nvim"
     )
 
     for dot in "${DOTFILES[@]}"; do
@@ -122,9 +137,9 @@ symlink_dotfiles() {
 # Main execution
 logG "Starting dotfiles setup..."
 
-clone_packages
-run_curls
-install_packages
+# clone_packages
+# run_curls
+# install_packages
 symlink_dotfiles
 
 source "$HOME/.nvm/nvm.sh"

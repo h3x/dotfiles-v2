@@ -197,6 +197,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 export BAT_THEME="Catppuccin Mocha"
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
 
 # Use fd for listing path candidates
 # - The first argument to the function ($1) is the base path to start traversal
@@ -230,6 +231,7 @@ zd() {
     z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
   fi
 }
+alias eww="/home/adam/dev/eww/target/release/eww"
 open() {
   xdg-open "$@" >/dev/null 2>&1 &
 }
