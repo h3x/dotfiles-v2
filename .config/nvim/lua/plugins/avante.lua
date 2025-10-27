@@ -1,0 +1,17 @@
+return {}
+-- return {
+--   "yetone/avante.nvim",
+--   keys = {
+--     { "<leader>wa", "<cmd>AvanteAsk<CR>",            desc = "Ask Avante" },
+--     { "<leader>wc", "<cmd>AvanteChat<CR>",           desc = "Chat with Avante" },
+--     { "<leader>we", "<cmd>AvanteEdit<CR>",           desc = "Edit Avante" },
+--     { "<leader>wf", "<cmd>AvanteFocus<CR>",          desc = "Focus Avante" },
+--     { "<leader>wh", "<cmd>AvanteHistory<CR>",        desc = "Avante History" },
+--     { "<leader>wm", "<cmd>AvanteModels<CR>",         desc = "Select Avante Model" },
+--     { "<leader>wn", "<cmd>AvanteChatNew<CR>",        desc = "New Avante Chat" },
+--     { "<leader>wp", "<cmd>AvanteSwitchProvider<CR>", desc = "Switch Avante Provider" },
+--     { "<leader>wr", "<cmd>AvanteRefresh<CR>",        desc = "Refresh Avante" },
+--     { "<leader>ws", "<cmd>AvanteStop<CR>",           desc = "Stop Avante" },
+--     { "<leader>wt", "<cmd>AvanteToggle<CR>",         desc = "Toggle Avante" },
+--   },
+-- }
