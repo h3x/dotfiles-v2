@@ -1,12 +1,22 @@
-(defwindow example
-           :monitor 0
-           :geometry (geometry :x "0%"
-                               :y "20px"
-                               :width "90%"
-                               :height "30px"
-                               :anchor "top center")
-           :stacking "fg"
-           :reserve (struts :distance "40px" :side "top")
-           :windowtype "dock"
-           :wm-ignore false
-  "example content")
+(box :orientation "v" :class "widget-box"
+  (label :text "System Metrics" :class "widget-title")
+
+  ;; Fan Speed
+  (box :orientation "h"
+    (label :text "Fan Speed: " :class "metric-label")
+    (label :text (sh "sensors | grep 'fan' | awk '{print $2}'") :class "metric-value")
+  )
+
+  ;; CPU Temperature
+  (box :orientation "h"
+    (label :text "CPU Temp: " :class "metric-label")
+    (label :text (sh "sensors | grep 'CPU' | awk '{print $2}'") :class "metric-value")
+  )
+
+  ;; RAM Usage
+  (box :orientation "h"
+    (label :text "RAM Usage: " :class "metric-label")
+    (label :text (sh "free -h | grep 'Mem:' | awk '{print $3"/"$2}'") :class "metric-value")
+  )
+)
+
