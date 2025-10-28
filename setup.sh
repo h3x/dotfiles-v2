@@ -54,55 +54,24 @@ run_curls() {
 
 
 install_packages() {
-    DISTRO=$(get_distro)
-    case "$DISTRO" in
-        ubuntu)
-            logG "Installing packages on Ubuntu..."
-            sudo apt update
-            while read -r pkg; do
-                [[ "$pkg" =~ ^#.*$ || -z "$pkg" ]] && continue
-                if ! dpkg -l | grep -q "^ii  $pkg"; then
-                    logG "Installing package: $pkg"
-                    sudo apt install -y "$pkg"
-                else
-                    error "Package $pkg is already installed"
-                fi
-            done < packages.txt
-            ;;
-        arch)
-            logG "Installing packages on Arch Linux..."
+  logG "Installing packages on Arch Linux..."
 
-            # Ensure yay is installed
-            if ! command -v yay &>/dev/null; then
-                logM "yay not found. Installing yay..."
-                sudo pacman -S --needed --noconfirm git base-devel
-                git clone https://aur.archlinux.org/yay.git /tmp/yay
-                (cd /tmp/yay && makepkg -si --noconfirm)
-                rm -rf /tmp/yay
-            fi
+  if ! command git -v &>/dev/null; then
+      logM "Git not found. Installing git..."
+      sudo pacman -S --noconfirm git
+  fi
 
-            while read -r pkg; do
-                [[ "$pkg" =~ ^#.*$ || -z "$pkg" ]] && continue
+  # Ensure yay is installed
+  if ! command -v yay &>/dev/null; then
+      logM "yay not found. Installing yay..."
+      sudo pacman -S --needed --noconfirm git base-devel
+      git clone https://aur.archlinux.org/yay.git /tmp/yay
+      (cd /tmp/yay && makepkg -si --noconfirm)
+      rm -rf /tmp/yay
+  fi
+  
 
-                if pacman -Qi "$pkg" &>/dev/null; then
-                    error "Package $pkg is already installed"
-                    continue
-                fi
-
-                if pacman -Si "$pkg" &>/dev/null; then
-                    logG "Installing $pkg from official repos..."
-                    sudo pacman -S --noconfirm --needed "$pkg"
-                else
-                    logG "Installing $pkg from AUR..."
-                    yay -S --noconfirm --needed "$pkg"
-                fi
-            done < packages.txt
-            ;;
-        *)
-            error "Unsupported Linux distribution: $DISTRO"
-            exit 1
-            ;;
-    esac
+  ./packages.sh
 }
 
 # Symlink dotfiles
@@ -116,6 +85,7 @@ symlink_dotfiles() {
         ".config/nvim"
         ".config/omarchy"
         ".zshrc"
+        ".config/starship.toml"
         # ".ideavimrc"
     )
 
@@ -137,8 +107,8 @@ symlink_dotfiles() {
 # Main execution
 logG "Starting dotfiles setup..."
 
-clone_packages
-run_curls
+# clone_packages
+# run_curls
 install_packages
 symlink_dotfiles
 

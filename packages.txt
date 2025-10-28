@@ -1,5 +1,0 @@
-starship
-bat
-eza
-lazygit
-lazydocker
