@@ -174,7 +174,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bindkey -s ^a "nvims\n"
-export EDITOR='/opt/nvim/nvim'
+export EDITOR='/usr/bin/nvim'
 
 export SECOND_BRAIN="$HOME/sb"
 

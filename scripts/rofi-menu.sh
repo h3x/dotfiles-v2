@@ -27,7 +27,7 @@ for script in $SCRIPTS; do
 done
 
 # Show Rofi menu
-CHOICE=$(echo -e "$MENU" | rofi -dmenu -p "Run script:")
+CHOICE=$(echo -e "$MENU" | rofi -dmenu -fuzzy -i -p "Run script:")
 
 # Exit if no selection
 [ -z "$CHOICE" ] && exit 0
