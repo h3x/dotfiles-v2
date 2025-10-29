@@ -82,6 +82,7 @@ symlink_dotfiles() {
         ".config/bat"
         ".config/eww"
         ".config/hypr"
+        ".config/waybar"
         ".config/nvim"
         ".config/omarchy"
         ".zshrc"
