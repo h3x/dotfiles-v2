@@ -1,0 +1,53 @@
+Monitor eDP-1 (ID 0):
+	2560x1440@60.00400 at 0x0
+	description: LG Display 0x0418
+	make: LG Display
+	model: 0x0418
+	physical size (mm): 310x170
+	serial: 
+	active workspace: 2 (2)
+	special workspace: 0 ()
+	reserved: 0 26 0 0
+	scale: 1.60
+	transform: 0
+	focused: yes
+	dpmsStatus: 1
+	vrr: false
+	solitary: 0
+	solitaryBlockedBy: windowed mode,missing candidate
+	activelyTearing: false
+	tearingBlockedBy: next frame is not torn,user settings,missing candidate
+	directScanoutTo: 0
+	directScanoutBlockedBy: user settings,missing candidate
+	disabled: false
+	currentFormat: XRGB8888
+	mirrorOf: none
+	availableModes: 2560x1440@60.00Hz 
+
+Monitor HDMI-A-2 (ID 1):
+	3840x2160@30.00000 at 1600x0
+	description: LG Electronics LG ULTRAWIDE 112NTWGFV697
+	make: LG Electronics
+	model: LG ULTRAWIDE
+	physical size (mm): 800x330
+	serial: 112NTWGFV697
+	active workspace: 5 (5)
+	special workspace: 0 ()
+	reserved: 0 26 0 0
+	scale: 1.60
+	transform: 0
+	focused: no
+	dpmsStatus: 1
+	vrr: false
+	solitary: 0
+	solitaryBlockedBy: windowed mode,missing candidate
+	activelyTearing: false
+	tearingBlockedBy: next frame is not torn,user settings,missing candidate
+	directScanoutTo: 0
+	directScanoutBlockedBy: user settings,missing candidate
+	disabled: false
+	currentFormat: XRGB8888
+	mirrorOf: none
+	availableModes: 3840x2160@30.00Hz 3840x2160@29.97Hz 3840x2160@25.00Hz 3840x2160@24.00Hz 3840x2160@23.98Hz 3440x1440@49.95Hz 2560x1080@60.00Hz 2560x1080@59.94Hz 2560x1080@50.00Hz 1920x1080@60.00Hz 1920x1080@60.00Hz 1920x1080@59.94Hz 1920x1080@50.00Hz 1280x720@60.00Hz 1280x720@59.94Hz 1024x768@60.00Hz 800x600@60.32Hz 720x576@50.00Hz 720x480@60.00Hz 720x480@59.94Hz 640x480@60.00Hz 640x480@59.94Hz 640x480@59.94Hz 
+
+

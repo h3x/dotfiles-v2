@@ -85,6 +85,7 @@ symlink_dotfiles() {
         ".config/waybar"
         ".config/nvim"
         ".config/omarchy"
+        ".config/rofi"
         ".zshrc"
         ".config/starship.toml"
         # ".ideavimrc"

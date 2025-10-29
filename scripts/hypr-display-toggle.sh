@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 # Auto-toggle between laptop and external displays for Hyprland.
 # Special case: set fixed resolution for a specific ultrawide monitor.
-#
-# This doesnt work. Running manually for now
-# Place the following in /etc/udev/rules.d/99-hypr-display.rules
-# ACTION=="change", SUBSYSTEM=="drm", RUN+="/home/adam/.local/bin/hypr-display-toggle.sh"
-# then: sudo udevadm control --reload
-
-# LOG="/tmp/hypr-udev.log"
-# echo "$(date): udev triggered" >> "$LOG"
 
 INTERNAL="eDP-1"
 MONS=$(hyprctl monitors all)
