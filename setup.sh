@@ -115,7 +115,7 @@ install_packages
 symlink_dotfiles
 
 source "$HOME/.nvm/nvm.sh"
-nvm install 20.5.0
+# nvm install 20.5.0
 
 logG "Dotfiles setup complete!"
 logM "Open a new terminal or run 'exec zsh' to start using your environment."

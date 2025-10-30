@@ -36,7 +36,7 @@ sudo pacman -Sy --needed starship bat eza lazygit lazydocker intel-media-driver 
 sudo pacman -S --needed rofi
 
 # Check if AUR is reachable
-if curl -s --head https://aur.archlinux.org | grep "200 OK" > /dev/null; then
+if curl -s --fail https://aur.archlinux.org/ > /dev/null; then
   yay -S --needed --noconfirm ttf-font-awesome ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols
   yay -S --needed --noconfirm awsvpnclient
   yay -S --needed --noconfirm keeper-password-manager

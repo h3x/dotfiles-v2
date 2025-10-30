@@ -238,4 +238,14 @@ open() {
 }
 
 # Alaya
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
+
 [ -f /home/adam/accloud-lde/profile/alaya_init.sh ] && source /home/adam/accloud-lde/profile/alaya_init.sh

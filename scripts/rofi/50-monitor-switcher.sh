@@ -8,7 +8,9 @@
 
 set -euo pipefail
 
-SCALE="1.6"
+SCALE_LABEL=$(echo -e "Monitor Scale: 1\nMonitor Scale: 1.6\nMonitor Scale: 2" | rofi -dmenu -p "Select scale:" -no-custom)
+[ -z "$SCALE_LABEL" ] && exit 0
+SCALE=$(echo "$SCALE_LABEL" | awk -F': ' '{print $2}')
 INTERNAL="eDP-1"
 
 # --- fetch monitor info ---

@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.opt.relativenumber = true
 vim.fn.setenv("PATH", "/home/adam/.nvm/versions/node/v22.2.0/bin:" .. vim.fn.getenv("PATH"))
+vim.g.lazyvim_picker = "telescope"
