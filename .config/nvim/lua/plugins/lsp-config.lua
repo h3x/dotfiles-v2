@@ -1,38 +1,149 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "vue", "css" } },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    opts = function(_, opts)
-      -- Volar "Take Over Mode": handle Vue + TS/JS in one server
-      opts.servers.vue_ls = opts.servers.vue_ls or {}
-      opts.servers.vue_ls.filetypes = { "vue", "typescript", "javascript", "javascriptreact", "typescriptreact" }
-      opts.servers.vue_ls.settings = opts.servers.vue_ls.settings or {}
-      opts.servers.vue_ls.settings.typescript = opts.servers.vue_ls.settings.typescript or {}
-      opts.servers.vue_ls.settings.typescript.tsdk = vim.fn.stdpath("data")
-        .. "/mason/packages/typescript-language-server/node_modules/typescript/lib"
+  "neovim/nvim-lspconfig",
+  dependencies = { "hoffs/omnisharp-extended-lsp.nvim" },
+  lazy = false,
+  config = function()
+    local lspconfig = require("lspconfig")
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Optionally, inject @vue/typescript-plugin for vtsls if you use it
-      if opts.servers.vtsls then
-        table.insert(opts.servers.vtsls.filetypes, "vue")
-        LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+    lspconfig.eslint.setup({
+      on_attach = function(_, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+        })
+      end,
+      on_new_config = function(config, new_root_dir)
+        config.settings.workspaceFolder = {
+          uri = vim.uri_from_fname(new_root_dir),
+          name = vim.fn.fnamemodify(new_root_dir, ":t"),
+        }
+      end,
+    })
+
+
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+    })
+
+    local mason_registry = require("mason-registry")
+    local vue_language_server = mason_registry.get_package("vue-language-server"):get_install_path()
+        .. "/node_modules/@vue/language-server"
+
+    lspconfig.ts_ls.setup({
+      capabilities = capabilities,
+      init_options = {
+        plugins = {
           {
             name = "@vue/typescript-plugin",
-            location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+            location = vue_language_server,
             languages = { "vue" },
-            configNamespace = "typescript",
-            enableForWorkspaceTypeScriptVersions = true,
-            vue_ls = {
-              filetypes = { "vue", "typescript", "javascript", "javascriptreact", "typescriptreact" },
-            },
-          },
-        })
-      end
-    end,
-  },
+          }
+        }
+      },
+      filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
+    })
+
+    lspconfig.html.setup({
+      filetypes = { "html", "ejs" },
+      capabilities = capabilities,
+    })
+
+    lspconfig.cssls.setup({
+      capabilities = capabilities,
+    })
+
+    lspconfig.pyright.setup({
+      capabilities = capabilities,
+    })
+
+    lspconfig.lemminx.setup({
+      capabilities = capabilities,
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+        vim.keymap.set(
+          "n",
+          "gd",
+          vim.lsp.buf.definition,
+          { desc = "Go to definition", buffer = ev.buf }
+        )
+
+        vim.keymap.set(
+          "n",
+          "gD",
+          vim.lsp.buf.declaration,
+          { desc = "Go to declaration", buffer = ev.buf }
+        )
+
+        vim.keymap.set(
+          "n",
+          "gi",
+          vim.lsp.buf.implementation,
+          { desc = "Go to implementation", buffer = ev.buf }
+        )
+
+        vim.keymap.set(
+          "n",
+          "gr",
+          vim.lsp.buf.references,
+          { desc = "Go to references", buffer = ev.buf }
+        )
+
+        vim.keymap.set(
+          "n",
+          "<leader>ca",
+          vim.lsp.buf.code_action,
+          { desc = "Code actions", buffer = ev.buf }
+        )
+
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
+        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Display errors" })
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Display symbol info", buffer = ev.buf })
+      end,
+    })
+  end,
 }
+
+-- return {
+--   {
+--     "nvim-treesitter/nvim-treesitter",
+--     opts = { ensure_installed = { "vue", "css" } },
+--   },
+--   {
+--     "neovim/nvim-lspconfig",
+--     opts = function(_, opts)
+--       -- Volar "Take Over Mode": handle Vue + TS/JS in one server
+--       opts.servers.vue_ls = opts.servers.vue_ls or {}
+--       opts.servers.vue_ls.filetypes = { "vue", "typescript", "javascript", "javascriptreact", "typescriptreact" }
+--       opts.servers.vue_ls.settings = opts.servers.vue_ls.settings or {}
+--       opts.servers.vue_ls.settings.typescript = opts.servers.vue_ls.settings.typescript or {}
+--       opts.servers.vue_ls.settings.typescript.tsdk = vim.fn.stdpath("data")
+--         .. "/mason/packages/typescript-language-server/node_modules/typescript/lib"
+--
+--       -- Optionally, inject @vue/typescript-plugin for vtsls if you use it
+--       if opts.servers.vtsls then
+--         table.insert(opts.servers.vtsls.filetypes, "vue")
+--         LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+--           {
+--             name = "@vue/typescript-plugin",
+--             location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+--             languages = { "vue" },
+--             configNamespace = "typescript",
+--             enableForWorkspaceTypeScriptVersions = true,
+--             vue_ls = {
+--               filetypes = { "vue", "typescript", "javascript", "javascriptreact", "typescriptreact" },
+--             },
+--           },
+--         })
+--       end
+--     end,
+--   },
+-- }
 
 -- return {
 --   {
