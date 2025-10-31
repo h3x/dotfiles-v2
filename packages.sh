@@ -32,8 +32,8 @@ if ! command -v rustc >/dev/null 2>&1; then
 fi
 
 # Other packages -- General
-sudo pacman -Sy --needed starship bat eza lazygit lazydocker intel-media-driver libva-utils tree dysk
-sudo pacman -S --needed rofi
+sudo pacman -Sy --needed --noconfirm starship bat eza lazygit lazydocker intel-media-driver libva-utils tree dysk
+sudo pacman -S --needed --noconfirm rofi bc
 
 # Check if AUR is reachable
 if curl -s --fail https://aur.archlinux.org/ > /dev/null; then
