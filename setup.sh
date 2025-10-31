@@ -88,7 +88,7 @@ symlink_dotfiles() {
         ".config/rofi"
         ".zshrc"
         ".config/starship.toml"
-        # ".ideavimrc"
+        ".ideavimrc"
     )
 
     for dot in "${DOTFILES[@]}"; do
