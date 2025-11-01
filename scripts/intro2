@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Set color variables
+NC=$(tput sgr0)
+BW=$(tput sgr0 && tput setab 111)
+RW=$(tput sgr0 && tput setab 160)
+
+RED=$(tput setaf 124)
+RED2=$(tput setaf 196)
+RED3=$(tput setaf 160)
+ORANGE=$(tput setaf 202)
+ORANGE2=$(tput setaf 208)
+ORANGE3=$(tput setaf 003)
+TEXT=$(tput setaf 002)
+T=$(tput setaf 002)
+S=$(tput setaf 164)
+P=$(tput setaf 063)
+O=$(tput setaf 208)
+G=$(tput setaf 035)
+A=$(tput setaf 165)
+B=$(tput setaf 033)
+C=$(tput setaf 210)
+D=$(tput setaf 075)
+E=$(tput setaf 118)
+F=$(tput setaf 180)
+
+logo=(
+  "${T} ______   ______     ______     __  __     ______     ______     ______
+${S}/${T}\\  == \\ ${S}/${T}\\  ___\\  ${S} /${T}\\  ___\\  ${S} /${T}\\ \\/ /   ${S} /${T}\\  __ \\  ${S} /${T}\\  == \\ ${S}  /${T}\\  __ \\ ${S}
+${S}\\ ${T}\\  _-/ ${S}\\ ${T}\\  __\\  ${S} \\ ${T}\\  __\\   ${S}\\ ${T}\\  _\"-. ${S} \\ ${T}\\  __ \\ ${S} \\ ${T}\\  __<  ${S} \\ ${T}\\ \\${S}/${T}\\ \\${S}
+ ${S}\\ ${T}\\_\    ${S}\\ ${T}\\_____\\ ${S} \\ ${T}\\_____\\  ${S}\\ ${T}\\_\\ \\_\\ ${S} \\ ${T}\\_\\ \\_\\ ${S} \\ ${T}\\_____\\ ${S} \\ ${T}\\_____\\ ${S}
+${S}  \\/_/     \\/_____/   \\/_____/   \\/_/\\/_/   \\/_/\\/_/   \\/_____/   \\/_____/
+ ${NC}"
+)
+
+# Print the randomly selected ASCII art
+echo "${logo}"

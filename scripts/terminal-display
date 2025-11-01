@@ -1,0 +1,16 @@
+
+#!/bin/bash
+
+# cmd="$*"
+# echo gum spin --spinner "globe" --title "Done! Press any key to close..." -- bash -c 'read -n 1 -s'
+#
+# clear echo -e "\033[32m" && cat <~/.local/share/omarchy/logo.txt && echo -e "\033[0m" && echo
+# exec setsid uwsm-app -- alacritty -o font.size=9 --class=Omarchy --title=Omarchy -e bash -c "omarchy-show-logo; $cmd; omarchy-show-done"
+
+
+cmd="$*"
+
+logo_cmd='clear; echo -e "\033[32m" && ~/dotfiles/scripts/intro2 && echo -e "\033[0m" && echo'
+done_cmd='gum spin --spinner "globe" --title "Done! Press any key to close..." -- bash -c "read -n 1 -s"'
+
+exec setsid uwsm-app -- alacritty -o font.size=9 --class=Omarchy --title=Omarchy -e bash -c "$logo_cmd; $cmd; $done_cmd"

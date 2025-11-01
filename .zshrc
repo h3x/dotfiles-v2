@@ -13,6 +13,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/:$PATH"
 export PATH="$HOME/dotfiles/scripts/standalone/:$PATH"
 export PATH="$HOME/dotfiles/scripts/work/:$PATH"
+export PATH="$HOME/dotfiles/scripts/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/.tmuxifier/bin:$PATH"

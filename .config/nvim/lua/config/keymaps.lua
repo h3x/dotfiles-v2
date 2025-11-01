@@ -29,7 +29,7 @@ vim.keymap.set("n", "<leader>fg", function()
 end, { desc = "Grep in project" })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "fg", "<C-z>")
+-- vim.keymap.set("n", "fg", "<C-z>")
 
 -- file tree
 vim.keymap.set("n", "<leader>re", ":Oil --float<CR>", { desc = "Open NetRW" })
