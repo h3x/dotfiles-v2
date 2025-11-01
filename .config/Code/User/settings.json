@@ -52,6 +52,8 @@
         "**/node_modules": true,
         "**/bower_components": true
     },
-    "workbench.colorTheme": "Night Owl" // optional, smoother transition
+    "workbench.colorTheme": "Night Owl",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.tools.terminal.autoReplyToPrompts": true // optional, smoother transition
 
 }
