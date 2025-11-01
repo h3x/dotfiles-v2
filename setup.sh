@@ -72,6 +72,18 @@ install_packages() {
   ./packages.sh
 }
 
+install_vscode_extensions() {
+  EXTENSIONS=(
+    "joshmu.periscope"
+    "vscodevim.vim"
+    ) 
+
+    for ext in "${EXTENSIONS[@]}"; do
+      logG "Installing VSCode extension: $ext"
+      code --install-extension "$ext"
+    done
+}
+
 # Symlink dotfiles
 symlink_dotfiles() {
   DIR=$HOME/dotfiles
@@ -111,6 +123,7 @@ logG "Starting dotfiles setup..."
 # clone_packages
 # run_curls
 install_packages
+install_vscode_extensions
 symlink_dotfiles
 
 source "$HOME/.nvm/nvm.sh"
