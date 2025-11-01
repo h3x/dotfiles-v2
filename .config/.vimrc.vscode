@@ -1,0 +1,88 @@
+" ------------------------------------------------------------
+" VimRC for VSCodeVim
+" Only contains Vim-native mappings
+" ------------------------------------------------------------
+
+" Leader key
+let mapleader = " "
+
+" -----------------------------
+" General Setup
+" -----------------------------
+set relativenumber
+set number
+set scrolloff=6
+set ignorecase
+set smartcase
+set incsearch
+set clipboard+=unnamedplus
+set timeoutlen=400
+
+" Highlight yank (requires vim-highlightedyank extension)
+let g:highlightedyank_highlight_color = "rgba(166, 227, 161, 155)"
+
+" -----------------------------
+" Escape key mapping
+" -----------------------------
+imap kj <Esc>
+imap KJ <Esc>o
+
+" -----------------------------
+" Searching / Substitutions
+" -----------------------------
+nnoremap <leader>s viw"/<C-r>k
+vnoremap <leader>s y:/<C-r>+
+vnoremap <leader>r y:%s/<C-r>+//gI<left><left><left>
+
+" -----------------------------
+" Center cursor when scrolling
+" -----------------------------
+nnoremap <c-u> <c-u>zz
+nnoremap <c-d> <c-d>zz
+
+" -----------------------------
+" Move selected lines up/down
+" -----------------------------
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" -----------------------------
+" Blackhole / delete mappings
+" -----------------------------
+nnoremap <leader>d "_d
+nnoremap <leader>p "_dP
+nnoremap <leader>wp viw"_dP
+nnoremap x "_x
+nnoremap X "_x
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
+vnoremap <leader>wp viw"_dP
+vnoremap x "_x
+vnoremap X "_x
+
+" -----------------------------
+" Marks (replacing IntelliJ bookmarks)
+" Use normal Vim marks: m{letter} to set, '{letter} to jump
+" Leader mappings for convenience
+" -----------------------------
+nnoremap <leader>mh ma
+nnoremap <leader>mj mb
+nnoremap <leader>mk mc
+nnoremap <leader>ml md
+
+nnoremap <leader>h 'a
+nnoremap <leader>j 'b
+nnoremap <leader>k 'c
+nnoremap <leader>l 'd
+
+" -----------------------------
+" Macros
+" -----------------------------
+map Q @qj
+vmap Q :norm @q<CR>
+
+" -----------------------------
+" Adjust indent in visual mode without leaving selection
+" -----------------------------
+vnoremap < <gv
+vnoremap > >gv

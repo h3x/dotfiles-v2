@@ -19,6 +19,7 @@ export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/Applications:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$PATH:/opt/nvim/"
+export PATH="$PATH:/snap/bin/"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
