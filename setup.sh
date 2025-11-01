@@ -88,6 +88,7 @@ symlink_dotfiles() {
     ".config/starship.toml"
     ".ideavimrc"
     ".config/.vimrc.vscode"
+    ".config/Code/User/settings.json"
   )
 
   for dot in "${DOTFILES[@]}"; do

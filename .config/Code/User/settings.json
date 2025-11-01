@@ -1,0 +1,57 @@
+{
+    "vim.useSystemClipboard": true,
+    "vim.leader": "<space>",
+    "vim.enableNeovim": false,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.config/.vimrc.vscode",
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.visual": "block",
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.cursorStylePerMode.replace": "underline",
+
+    "editor.lineNumbers": "relative",
+    "editor.cursorStyle": "block",
+    "editor.scrollBeyondLastLine": false,
+    "search.smartCase": true,
+
+    "vim.visualModeKeyBindingsNonRecursive": [
+        { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+        { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] }
+    ],
+
+    "vim.insertModeKeyBindings": [
+        { "before": ["k","j"], "after": ["<Esc>"] },
+        { "before": ["K","J"], "after": ["<Esc>o"] }
+    ],
+     "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["<leader>", "r", "e"], "commands": ["workbench.action.toggleSidebarVisibility"] },
+        { "before": ["<leader>", "/"], "commands": ["editor.action.commentLine"] },
+        { "before": ["<leader>", "b", "b"], "commands": ["editor.debug.action.toggleBreakpoint"] },
+        { "before": ["<leader>", "t", "t"], "commands": ["workbench.action.debug.run"] },
+        { "before": ["<leader>", "t", "b"], "commands": ["workbench.action.debug.start"] },
+        { "before": ["<leader>", "t", "d"], "commands": ["workbench.action.debug.continue"] },
+        { "before": ["<leader>", "u"], "commands": ["editor.action.referenceSearch.trigger"] },
+        { "before": ["<leader>", "o"], "commands": ["workbench.action.toggleZenMode"] },
+        { "before": ["<c-k>"], "commands": ["editor.action.showHover"] },
+        { "before": ["<c-r>"], "commands": ["redo"] },
+        { "before": ["<s-tab>"], "commands": ["workbench.action.previousEditor"] },
+        { "before": ["<tab>"], "commands": ["workbench.action.nextEditor"] },
+        { "before": ["<leader>", "q"], "commands": ["workbench.action.closeActiveEditor"] },
+        { "before": ["<leader>", "a"], "commands": ["workbench.action.gotoSymbol"] },
+        { "before": ["<leader>", "f", "g"], "commands": [ { "command": "periscope.search", "when": "editorTextFocus" }]},
+        { "before": ["<leader>", "f", "f"], "commands": [ { "command": "periscope.searchFiles", "when": "editorTextFocus" }]},
+    ],
+    "files.exclude": {
+        "**/.git": false,
+        "**/.svn": false,
+        "**/.hg": false,
+        "**/.DS_Store": false,
+        "**/.vscode": false
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    "workbench.colorTheme": "Tokyo Night" // optional, smoother transition
+
+}
