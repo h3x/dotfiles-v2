@@ -52,6 +52,6 @@
         "**/node_modules": true,
         "**/bower_components": true
     },
-    "workbench.colorTheme": "Tokyo Night" // optional, smoother transition
+    "workbench.colorTheme": "Night Owl" // optional, smoother transition
 
 }
