@@ -32,7 +32,7 @@ fi
 
 # Other packages -- General
 sudo pacman -Sy --needed --noconfirm starship bat eza lazygit lazydocker intel-media-driver libva-utils tree dysk
-sudo pacman -Sy --needed --noconfirm rofi bc visual-studio-code-bin magic-wormhole
+sudo pacman -Sy --needed --noconfirm rofi bc visual-studio-code-bin magic-wormhole 7zip
 
 # Check if AUR is reachable
 if curl -s --fail https://aur.archlinux.org/ >/dev/null; then
