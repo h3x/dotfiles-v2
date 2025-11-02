@@ -2,7 +2,7 @@
 
 RED="\e[31m"
 log() {
-    echo -e "${RED}[ERROR] $1${ENDCOLOR}"
+  echo -e "${RED}[ERROR] $1${ENDCOLOR}"
 }
 # Git repos for things
 
@@ -19,12 +19,11 @@ EOF
 done
 
 # nvm and node
-if [ ! -d "$HOME/.nvm" ]; then 
+if [ ! -d "$HOME/.nvm" ]; then
   mkdir -p ~/.nvm && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
   nvm install 22.21.0
   nvm use 22.21.0
 fi
-
 
 # rust
 if ! command -v rustc >/dev/null 2>&1; then
@@ -33,15 +32,13 @@ fi
 
 # Other packages -- General
 sudo pacman -Sy --needed --noconfirm starship bat eza lazygit lazydocker intel-media-driver libva-utils tree dysk
-sudo pacman -Sy --needed --noconfirm rofi bc visual-studio-code-bin
+sudo pacman -Sy --needed --noconfirm rofi bc visual-studio-code-bin magic-wormhole
 
 # Check if AUR is reachable
-if curl -s --fail https://aur.archlinux.org/ > /dev/null; then
+if curl -s --fail https://aur.archlinux.org/ >/dev/null; then
   yay -S --needed --noconfirm ttf-font-awesome ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols
   yay -S --needed --noconfirm awsvpnclient
   yay -S --needed --noconfirm keeper-password-manager
 else
   log "AUR is currently down. Can't install AUR packages right now."
 fi
-
-

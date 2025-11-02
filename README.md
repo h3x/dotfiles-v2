@@ -2,6 +2,12 @@
 
 Version 2 of my dotfiles
 
+### Stabilisation
+```
+sudo pacman -S linux-lts linux-headers-lts
+```
+
+
 ### TODO:
 ## Lazy
   - blink getting errors
