@@ -11,6 +11,20 @@
   font-size: 12px;
 }
 
+#waybar {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+#waybar > box > * {
+  background: rgba(30, 30, 46, 0.85); /* or your preferred color/opacity */
+  border-radius: 12px;
+  padding: 0 10px;
+  margin: 0 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
 .modules-left {
   margin-left: 8px;
 }
@@ -30,34 +44,48 @@
   opacity: 0.5;
 }
 
-#cpu,
-#battery,
+#cpu {
+  min-width: 12px;
+  margin: 0 7.5px;
+  color: #0db9d7;
+}
+#battery {
+  min-width: 12px;
+  margin: 0 7.5px;
+  color: #bb9af7;
+}
 #pulseaudio,
 #custom-omarchy,
 #custom-screenrecording-indicator,
 #custom-update {
   min-width: 12px;
   margin: 0 7.5px;
+  color: #b9f27c;
 }
 
 #tray {
   margin-right: 16px;
 }
 
+
 #bluetooth {
   margin-right: 17px;
+  color: #7aa2f7;
 }
 
 #network {
   margin-right: 13px;
+  color: #e0af68;
 }
 
 #custom-expand-icon {
   margin-right: 20px;
+  color: #ad8ee6;
 }
 
 tooltip {
   padding: 2px;
+  color: #9ece6a;
 }
 
 #custom-update {
@@ -66,6 +94,7 @@ tooltip {
 
 #clock {
   margin-left: 8.75px;
+  color: #00ff99;
 }
 
 .hidden {
