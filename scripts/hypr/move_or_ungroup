@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+active_window=$(hyprctl activewindow -j)
+in_group=$(echo "$active_window" | jq -r '.grouped')
+
+if [ "$in_group" != "[]" ]; then
+    hyprctl dispatch moveoutofgroup "$1"
+else
+    hyprctl dispatch swapwindow "$1"
+fi
