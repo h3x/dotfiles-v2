@@ -1,4 +1,9 @@
 {
+    "volar.vue2Mode": true,
+    "vetur.useWorkspaceDependencies": true,
+    "vetur.validation.script": true,
+    "vetur.validation.template": true,
+    "vetur.validation.style": true,
     "vim.useSystemClipboard": true,
     "vim.leader": "<space>",
     "vim.enableNeovim": false,
@@ -40,6 +45,9 @@
         { "before": ["<leader>", "a"], "commands": ["workbench.action.gotoSymbol"] },
         { "before": ["<leader>", "f", "g"], "commands": [ { "command": "periscope.search", "when": "editorTextFocus" }]},
         { "before": ["<leader>", "f", "f"], "commands": [ { "command": "periscope.searchFiles", "when": "editorTextFocus" }]},
+        { "before": ["<leader>", "c", "c"], "commands": [ { "command": "workbench.action.chat.toggle" }
+    ]
+  }
     ],
     "files.exclude": {
         "**/.git": false,
@@ -52,8 +60,12 @@
         "**/node_modules": true,
         "**/bower_components": true
     },
-    "workbench.colorTheme": "Night Owl",
     "github.copilot.nextEditSuggestions.enabled": true,
-    "chat.tools.terminal.autoReplyToPrompts": true // optional, smoother transition
+    "chat.tools.terminal.autoReplyToPrompts": true,
+    "files.autoSave": "afterDelay",
+    "editor.minimap.autohide": "mouseover",
+    "workbench.colorTheme": "Night Owl",
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1" // optional, smoother transition
 
 }

@@ -1,10 +1,9 @@
-
 #!/bin/bash
 SLACK_CLASS="Slack"
 HIDDEN_WS="9"
 
 # Get active monitor dimensions using hyprctl
-read SCREEN_WIDTH SCREEN_HEIGHT SCREEN_SCALE< <(
+read SCREEN_WIDTH SCREEN_HEIGHT SCREEN_SCALE < <(
   hyprctl monitors -j | jq -r '.[] | select(.focused) | "\(.width) \(.height) \(.scale)"'
 )
 
@@ -13,7 +12,7 @@ if [ "$SCREEN_WIDTH" -gt 1920 ]; then
   # WIN_WIDTH=$(((SCREEN_WIDTH * 60 / 100) / SCREEN_SCALE))
   WIN_WIDTH=$(echo "scale=0; (($SCREEN_WIDTH * 60 / 100) / $SCREEN_SCALE)+0.5" | bc)
 else
-  
+
   WIN_WIDTH=$(echo "scale=0; (($SCREEN_WIDTH * 85 / 100) / $SCREEN_SCALE)+0.5" | bc)
   # WIN_WIDTH=$(((SCREEN_WIDTH * 85 / 100) / SCREEN_SCALE))
 fi
@@ -22,7 +21,6 @@ WIN_WIDTH=$(echo "scale=0; (($SCREEN_HEIGHT * 80 / 100) / $SCREEN_SCALE)+0.5" | 
 
 echo "$WIN_WIDTH"
 echo "$WIN_HEIGHT"
-
 
 # Get Slack window ID (address)
 WIN_ID=$(hyprctl clients -j | jq -r '.[] | select(.class=="'"$SLACK_CLASS"'") | .address')
@@ -50,6 +48,8 @@ if [ "$SLACK_WS" = "$CUR_WS" ]; then
   # Move to hidden workspace
   hyprctl dispatch movetoworkspacesilent "$HIDDEN_WS,address:$WIN_ID"
   hyprctl dispatch centerwindow address:$WIN_ID
+  hyprctl dispatch unsetfloating address:$WIN_ID
+  hyprctl dispatch focusworkspace "$CUR_WS"
 else
   # Move to current workspace and focus
   hyprctl dispatch setfloating address:$WIN_ID
