@@ -1,0 +1,14 @@
+include:
+  - services/api/docker-compose.lde.yml
+  - services/redis/docker-compose.lde.yml
+  - services/maildev/docker-compose.lde.yml
+      
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+    name: myapp_default
+secrets:
+  CODEARTIFACT_AUTH_TOKEN:
+    environment: CODEARTIFACT_AUTH_TOKEN

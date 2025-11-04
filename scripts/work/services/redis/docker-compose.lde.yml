@@ -1,0 +1,9 @@
+services:
+  redis:
+    extends:
+      file: docker-compose.lde.prod.yml
+      service: redis
+    volumes:
+      - redis-data:/data
+    environment:
+      - REDIS_ENV=local

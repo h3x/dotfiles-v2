@@ -1,0 +1,5 @@
+services:
+  maildev:
+    image: maildev/maildev:latest
+    environment:
+      - MAILDEV_MODE=prod

@@ -1,0 +1,18 @@
+services:
+  api:
+    extends:
+      file: docker-compose.lde.prod.yml
+      service: api
+    image: myorg/api:latest
+    build:
+      context: ./backend/api
+      target: dev
+    command: ["npm", "run", "dev"]
+    environment:
+      - API_ENV=local
+      - LOG_LEVEL=debug
+    volumes:
+      - ./backend/api:/app
+      - ./backend/api:/app:delegated
+    depends_on:
+      - redis

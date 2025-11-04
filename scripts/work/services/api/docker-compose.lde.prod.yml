@@ -1,0 +1,7 @@
+services:
+  api:
+    image: myorg/api:prod
+    command: run-dev
+    environment:
+      - API_ENV=prod
+      - LOG_LEVEL=info

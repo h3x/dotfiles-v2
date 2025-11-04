@@ -1,0 +1,11 @@
+services:
+  maildev:
+    extends:
+      file: docker-compose.lde.prod.yml
+      service: maildev
+    environment:
+      - MAILDEV_MODE=local
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
