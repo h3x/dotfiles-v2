@@ -82,7 +82,11 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "", remap = true })
 -- Navigation
 -- vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
---
+-- Better window navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
 -- [[ Maybe not needed anymore ]] --
 
 -- -- Keybinds to make split navigation easier.
