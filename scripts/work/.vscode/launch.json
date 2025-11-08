@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lua",
+      "request": "launch",
+      "name": "Launch Current Lua File (auto debug)",
+      "program": "${file}",
+      "cwd": "${fileDirname}",
+      "runtimeExecutable": "/usr/bin/lua5.1",
+      "stopOnEntry": true,
+    }
+  ]
+}
